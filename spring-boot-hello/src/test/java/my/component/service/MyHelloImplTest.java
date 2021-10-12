@@ -1,8 +1,6 @@
 package my.component.service;
 
 
-
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
