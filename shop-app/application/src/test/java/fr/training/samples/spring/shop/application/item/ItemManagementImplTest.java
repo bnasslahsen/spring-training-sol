@@ -40,6 +40,9 @@ public class ItemManagementImplTest extends SpringBootAppTest {
 		List<ItemEntity> itemEntities = itemManagement.getAllItems();
 		assertTrue(itemEntities.size() == 1);
 
+		// Test with cache
+		itemManagement.getAllItems();
+		verify(itemRepository).getAllItems();
 	}
 
 	@Test
@@ -51,14 +54,6 @@ public class ItemManagementImplTest extends SpringBootAppTest {
 		ItemEntity itemResultEntity = itemManagement.addItem(itemEntity);
 		assertNotNull(itemResultEntity);
 		assertEquals("DESC99", itemResultEntity.getItemVO().getDescription());
-	}
-
-	@Test
-	public void testGetAllItemsWithCache() {
-		itemManagement.getAllItems();
-		// Test with cache
-		itemManagement.getAllItems();
-		verify(itemRepository).getAllItems();
 	}
 
 	@Test
