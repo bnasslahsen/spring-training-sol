@@ -11,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ItemDataJpaRepository extends JpaRepository<ItemEntity, String> {
 
-	Set<ItemEntity> findByIdIn(Set<String> itemsId);
+	Set<ItemEntity> findByIdIn(Set<String> id);
 }

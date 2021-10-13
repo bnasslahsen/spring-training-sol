@@ -3,6 +3,7 @@ package fr.training.samples.spring.shop.infrastructure.item;
 import java.util.List;
 import java.util.Set;
 
+import fr.training.samples.spring.shop.domain.common.exception.NotFoundException;
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
 
@@ -27,7 +28,8 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	public ItemEntity findOne(String itemId) {
-		return itemDataJpaRepository.getOne(itemId);
+		return itemDataJpaRepository.findById(itemId)
+				.orElseThrow(() -> new NotFoundException("Item with id:" + itemId + ", not found"));
 	}
 
 	@Override

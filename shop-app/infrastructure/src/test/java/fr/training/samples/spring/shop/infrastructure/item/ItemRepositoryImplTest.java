@@ -1,6 +1,9 @@
 package fr.training.samples.spring.shop.infrastructure.item;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
@@ -34,6 +37,24 @@ public class ItemRepositoryImplTest {
 	public void testgetAllItems(){
 		List<ItemEntity> items = itemRepository.getAllItems();
 		assertTrue(items.size()==5);
+	}
+
+
+	@Test
+	void findOne() {
+		ItemEntity itemEntity = itemRepository.findOne("123e4567-e89b-42d3-a456-556642440001");
+		assertEquals("DESC1", itemEntity.getItemVO().getDescription());
+		assertEquals(10, itemEntity.getItemVO().getPrice());
+	}
+
+	@Test
+	void testGetAllItems() {
+		final Set<String> items = Stream.of("123e4567-e89b-42d3-a456-556642440001",
+				"123e4567-e89b-42d3-a456-556642440002", "123e4567-e89b-42d3-a456-556642440003")
+				.collect(Collectors.toSet());
+		final Set<ItemEntity> itemEntities = itemRepository.getAllItems(items);
+		assertNotNull(itemEntities);
+		assertTrue(itemEntities.size() == 3);
 	}
 }
 
