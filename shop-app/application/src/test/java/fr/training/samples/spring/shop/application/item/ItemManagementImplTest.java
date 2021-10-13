@@ -1,10 +1,9 @@
-package fr.training.samples.spring.shop.application;
+package fr.training.samples.spring.shop.application.item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.training.samples.spring.shop.SpringBootAppTest;
-import fr.training.samples.spring.shop.application.item.ItemManagement;
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
 import fr.training.samples.spring.shop.domain.item.ItemVO;

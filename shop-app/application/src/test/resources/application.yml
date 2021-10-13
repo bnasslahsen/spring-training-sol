@@ -3,7 +3,6 @@ spring:
     active: test
   main:
    banner-mode: 'off'
+   lazy-initialization: true
   jpa:
     show-sql: false
-    open-in-view: false
-    orm: META-INF/orm.xml

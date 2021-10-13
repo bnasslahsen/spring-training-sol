@@ -36,7 +36,6 @@ import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
 import fr.training.samples.spring.shop.domain.order.OrderEntity;
 import fr.training.samples.spring.shop.domain.order.OrderRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
