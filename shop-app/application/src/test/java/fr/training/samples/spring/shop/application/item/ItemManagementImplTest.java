@@ -31,7 +31,7 @@ public class ItemManagementImplTest extends SpringBootAppTest {
 	private ItemRepository itemRepository;
 
 	@Test
-	public void testGetAllItems() {
+	void testGetAllItems() {
 		List<ItemEntity> entityListMock = new ArrayList<>();
 		ItemEntity itemEntity = new ItemEntity();
 		entityListMock.add(itemEntity);
@@ -57,7 +57,7 @@ public class ItemManagementImplTest extends SpringBootAppTest {
 	}
 
 	@Test
-	public void addItemWithCache() {
+	void addItemWithCache() {
 		// Load entries in the cache
 		ItemEntity itemEntity = new ItemEntity(new ItemVO("mock item description", 100));
 		List<ItemEntity> itemEntitiesMock = new ArrayList<>();
