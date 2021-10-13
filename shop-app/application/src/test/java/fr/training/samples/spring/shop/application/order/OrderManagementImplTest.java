@@ -1,5 +1,8 @@
 package fr.training.samples.spring.shop.application.order;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -64,8 +67,24 @@ public class OrderManagementImplTest extends SpringBootAppTest {
 	}
 
 	@Test
-	public void addOrders() {
-		// TODO
+	void testAddOrders() {
+		final OrderEntity orderEntity1 = this.createOrder("123e4567-e89b-42d3-a456-556642440000",
+				"123e4567-e89b-42d3-a456-556642440001", 99);
+		final OrderEntity orderEntity2 = this.createOrder("123e4567-e89b-42d3-a456-556642440000",
+				"123e4567-e89b-42d3-a456-556642440002", 99);
+		final List<OrderEntity> orders = Stream.of(orderEntity1, orderEntity2).collect(Collectors.toList());
+		orderRepository.addOrders(orders);
+		assertNotNull(orderEntity1.getId());
+		assertNotNull(orderEntity2.getId());
+	}
+
+	private OrderEntity createOrder(final String customerId, final String itemId, final int price) {
+		final CustomerEntity customer = customerRepository.findOne(customerId);
+		final ItemEntity itemEntity = itemRepository.findOne(itemId);
+		final OrderEntity orderEntity = new OrderEntity();
+		orderEntity.setCustomer(customer);
+		orderEntity.setItems(new HashSet<ItemEntity>(Arrays.asList(itemEntity)));
+		return orderEntity;
 	}
 
 	private OrderEntity createOrder() {
