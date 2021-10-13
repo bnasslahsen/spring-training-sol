@@ -1,9 +1,13 @@
 package fr.training.samples.spring.shop.infrastructure.item;
 
+import java.util.List;
+
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
 import fr.training.samples.spring.shop.domain.item.ItemVO;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,12 @@ public class ItemRepositoryImplTest {
 		ItemEntity itemEntity = new ItemEntity(itemVO);
 		ItemEntity result = itemRepository.addItem(itemEntity);
 		assertNotNull(result);
+	}
+
+	@Test
+	public void testgetAllItems(){
+		List<ItemEntity> items = itemRepository.getAllItems();
+		assertTrue(items.size()==5);
 	}
 }
 
