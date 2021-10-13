@@ -5,16 +5,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import fr.training.samples.spring.shop.domain.common.exception.NotFoundException;
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
 import fr.training.samples.spring.shop.domain.item.ItemVO;
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author bnasslahsen
@@ -26,7 +29,7 @@ public class ItemRepositoryImplTest {
 	private ItemRepository itemRepository;
 
 	@Test
-	public void testAddItem(){
+	public void testAddItem() {
 		ItemVO itemVO = new ItemVO("Desc44", 99);
 		ItemEntity itemEntity = new ItemEntity(itemVO);
 		ItemEntity result = itemRepository.addItem(itemEntity);
@@ -34,9 +37,9 @@ public class ItemRepositoryImplTest {
 	}
 
 	@Test
-	public void testgetAllItems(){
+	public void testgetAllItems() {
 		List<ItemEntity> items = itemRepository.getAllItems();
-		assertTrue(items.size()==5);
+		assertTrue(items.size() == 5);
 	}
 
 
@@ -45,6 +48,17 @@ public class ItemRepositoryImplTest {
 		ItemEntity itemEntity = itemRepository.findOne("123e4567-e89b-42d3-a456-556642440001");
 		assertEquals("DESC1", itemEntity.getItemVO().getDescription());
 		assertEquals(10, itemEntity.getItemVO().getPrice());
+	}
+
+	@Test
+	void findOneUnhappy() {
+		ItemEntity itemEntity = null;
+		try {
+			itemEntity = itemRepository.findOne("123e4567-e89b-42d3-a456-556642440099");
+		}
+		catch (NotFoundException notFoundException) {
+		}
+		assertNull(itemEntity);
 	}
 
 	@Test
