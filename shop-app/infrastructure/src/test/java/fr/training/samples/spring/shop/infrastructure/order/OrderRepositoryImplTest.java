@@ -64,6 +64,7 @@ class OrderRepositoryImplTest {
 
     @Test
 	void testAddOrder() {
+		assertTrue(orderDataJpaRepository.findAll().size()==3);
 		final OrderEntity orderEntity = this.createOrder("123e4567-e89b-42d3-a456-556642440000",
 				"123e4567-e89b-42d3-a456-556642440001", 99);
         orderRepository.addOrder(orderEntity);
