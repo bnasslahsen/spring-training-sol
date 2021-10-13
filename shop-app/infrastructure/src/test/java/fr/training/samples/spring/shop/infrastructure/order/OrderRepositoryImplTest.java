@@ -36,6 +36,7 @@ import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.item.ItemRepository;
 import fr.training.samples.spring.shop.domain.order.OrderEntity;
 import fr.training.samples.spring.shop.domain.order.OrderRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @DataJpaTest
@@ -56,13 +58,17 @@ class OrderRepositoryImplTest {
 
     @Autowired
     private CustomerRepository customerRepository;
-    
+
+    @Autowired
+    private OrderDataJpaRepository orderDataJpaRepository;
+
     @Test
 	void testAddOrder() {
 		final OrderEntity orderEntity = this.createOrder("123e4567-e89b-42d3-a456-556642440000",
 				"123e4567-e89b-42d3-a456-556642440001", 99);
         orderRepository.addOrder(orderEntity);
         assertNotNull(orderEntity.getId());
+		assertTrue(orderDataJpaRepository.findAll().size()==4);
     }
 
     @Test

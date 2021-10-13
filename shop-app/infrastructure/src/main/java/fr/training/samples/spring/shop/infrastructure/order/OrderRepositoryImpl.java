@@ -44,7 +44,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public OrderEntity addOrder(final OrderEntity orderEntity) {
-		return orderEntity;
+		return orderDataJpaRepository.save(orderEntity);
 	}
 
 	@Override
