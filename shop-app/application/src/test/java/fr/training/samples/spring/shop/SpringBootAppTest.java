@@ -1,22 +1,16 @@
 package fr.training.samples.spring.shop;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author Badr NASS
  *
  */
-@SpringBootConfiguration
-@EnableAutoConfiguration
-@ComponentScan(basePackages = { "fr.training.samples.spring.shop" }, lazyInit = true)
-public class SpringBootAppTest {
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootAppTest.class, args);
-	}
+@SpringBootTest
+public abstract class SpringBootAppTest {
+
+	@SpringBootApplication
+	static class SpringTestApp {}
+
 }
