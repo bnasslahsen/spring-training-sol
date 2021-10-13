@@ -37,6 +37,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 
 	@Override
 	public Set<ItemEntity> getAllItems(Set<String> itemsId) {
-		return null;
+		return itemDataJpaRepository.findByIdIn(itemsId);
 	}
 }
