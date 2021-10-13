@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -29,16 +31,16 @@ public class ItemManagementImplTest extends SpringBootAppTest {
 	private ItemRepository itemRepository;
 
 	@Test
-	public void testGetAllItems(){
+	public void testGetAllItems() {
 		List<ItemEntity> entityListMock = new ArrayList<>();
 		ItemEntity itemEntity = new ItemEntity();
 		entityListMock.add(itemEntity);
 
 		when(itemRepository.getAllItems()).thenReturn(entityListMock);
-		List<ItemEntity>  itemEntities = itemManagement.getAllItems();
-		assertTrue(itemEntities.size()==1);
-	}
+		List<ItemEntity> itemEntities = itemManagement.getAllItems();
+		assertTrue(itemEntities.size() == 1);
 
+	}
 
 	@Test
 	void addItem() {
@@ -51,4 +53,33 @@ public class ItemManagementImplTest extends SpringBootAppTest {
 		assertEquals("DESC99", itemResultEntity.getItemVO().getDescription());
 	}
 
+	@Test
+	public void testGetAllItemsWithCache() {
+		itemManagement.getAllItems();
+		// Test with cache
+		itemManagement.getAllItems();
+		verify(itemRepository).getAllItems();
+	}
+
+	@Test
+	public void addItemWithCache() {
+		// Load entries in the cache
+		ItemEntity itemEntity = new ItemEntity(new ItemVO("mock item description", 100));
+		List<ItemEntity> itemEntitiesMock = new ArrayList<>();
+		when(itemRepository.getAllItems()).thenReturn(itemEntitiesMock);
+		itemManagement.getAllItems();
+		itemManagement.getAllItems();
+		itemManagement.getAllItems();
+		itemManagement.getAllItems();
+
+		ItemVO itemVO = new ItemVO("DESC99", 99);
+		ItemEntity itemEntityToAdd = new ItemEntity(itemVO);
+		when(itemRepository.addItem(itemEntity)).thenReturn(itemEntityToAdd);
+		// Evict entries from the cache
+		itemManagement.addItem(itemEntityToAdd);
+
+		// Check evict - cache reloded
+		itemManagement.getAllItems();
+		verify(itemRepository, times(2)).getAllItems();
+	}
 }
