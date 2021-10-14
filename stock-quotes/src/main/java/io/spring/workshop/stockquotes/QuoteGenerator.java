@@ -61,7 +61,6 @@ public class QuoteGenerator {
 				.map(baseQuote -> {
 					BigDecimal priceChange = baseQuote.getPrice()
 							.multiply(new BigDecimal(0.05 * this.random.nextDouble()), this.mathContext);
-
 					Quote result = new Quote(baseQuote.getTicker(), baseQuote.getPrice().add(priceChange));
 					result.setInstant(instant);
 					return result;
