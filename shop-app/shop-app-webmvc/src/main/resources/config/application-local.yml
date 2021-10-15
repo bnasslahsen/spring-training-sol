@@ -1,10 +1,12 @@
 #Monitoring endpoints
 spring:
   shop:
+    api:
+      url: http://localhost:8080
     showItems:
-      url: http://localhost:8080/api/items
+      url: ${spring.shop.api.url}/api/items
     addOrder:
-      url: http://localhost:8080/api/addOrder
+      url: ${spring.shop.api.url}/api/addOrder
 
 management:
    endpoints:
