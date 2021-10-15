@@ -1,6 +1,7 @@
 package fr.training.samples.spring.shop.application.item;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -34,5 +35,10 @@ public class ItemManagementImpl implements ItemManagement {
 	@Cacheable("itemCache")
 	public List<ItemEntity> getAllItems() {
 		return itemRepository.getAllItems();
+	}
+
+	@Override
+	public Set<ItemEntity> getAllItems(Set<String> itemsId) {
+		return itemRepository.getAllItems(itemsId);
 	}
 }

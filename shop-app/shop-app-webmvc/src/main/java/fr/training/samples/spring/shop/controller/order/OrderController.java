@@ -4,12 +4,13 @@ package fr.training.samples.spring.shop.controller.order;
  * @author bnasslahsen
  */
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import fr.training.samples.spring.shop.application.item.ItemManagement;
 import fr.training.samples.spring.shop.application.order.OrderManagement;
+import fr.training.samples.spring.shop.controller.item.ItemDTO;
 import fr.training.samples.spring.shop.controller.item.ItemMapper;
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.order.OrderEntity;
@@ -17,6 +18,7 @@ import fr.training.samples.spring.shop.domain.order.OrderEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -28,6 +30,7 @@ public class OrderController {
 	private final OrderManagement orderManagement;
 
 	private final ItemManagement itemManagement;
+
 	/**
 	 * orderMapper of type OrderMapper
 	 */
@@ -52,15 +55,16 @@ public class OrderController {
 		itemSet.addAll(itemEntities);
 		orderDTO.setItems(itemMapper.mapToDtoSet(itemSet));
 		model.addAttribute("orderModel", orderDTO);
-		List<String> itemsIDs = new ArrayList<>();
-		itemsIDs.add("1");
-		model.addAttribute("itemIDs" ,itemsIDs);
 		return "addOrder";
 	}
 
 	@PostMapping("/addOrder")
-	public String addOrders(Model model) {
-		OrderDTO orderDTO = (OrderDTO) model.getAttribute("orderModel");
+	public String addOrders(@ModelAttribute("orderModel") OrderDTO orderDTO) {
+		Set<String> itemIDs = orderDTO.getItemIDs();
+		Set<ItemEntity> itemEntitySet = itemManagement.getAllItems(itemIDs);
+		Set<ItemDTO> itemDTOS = itemMapper.mapToDtoSet(itemEntitySet);
+		orderDTO.setItems(itemDTOS);
+
 		final OrderEntity orderEntity = orderMapper.mapToEntity(orderDTO);
 		orderManagement.addOrder(orderEntity);
 		return "addOrder";
