@@ -4,30 +4,31 @@ package fr.training.samples.spring.shop.controller.item;
  * @author bnasslahsen
  */
 
+import java.util.Arrays;
 import java.util.List;
 
-import fr.training.samples.spring.shop.application.item.ItemManagement;
-import fr.training.samples.spring.shop.domain.item.ItemEntity;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class ItemController {
 
-	private ItemManagement itemManagement;
-	private final ItemMapper itemMapper;
+	@Autowired
+	private RestTemplate restTemplate;
 
-	public ItemController(ItemManagement itemManagement, ItemMapper itemMapper) {
-		this.itemManagement = itemManagement;
-		this.itemMapper = itemMapper;
-	}
+	@Value("${spring.shop.showItems.url}")
+	private String showItemsUrl;
+
 
 	@GetMapping("/items")
 	public String showItems(Model model) {
-		List<ItemEntity> itemEntities = itemManagement.getAllItems();
-		model.addAttribute("items", itemMapper.mapToDtoList(itemEntities));
+		ItemDTO[] response = restTemplate.getForObject(showItemsUrl, ItemDTO[].class);
+		List<ItemDTO> items = Arrays.asList(response);
+		model.addAttribute("items", items);
 		return "items";
 	}
 

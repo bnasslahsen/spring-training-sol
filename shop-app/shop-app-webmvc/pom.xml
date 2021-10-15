@@ -41,18 +41,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- Project dependencies -->
-		<dependency>
-			<groupId>fr.training.samples</groupId>
-			<artifactId>shop-app-infrastructure</artifactId>
-			<version>0.0.11-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>fr.training.samples</groupId>
-			<artifactId>shop-app-application</artifactId>
-			<version>0.0.11-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>

@@ -1,9 +1,4 @@
-spring:
-  datasource:
-    jndi-name: jdbc/postgres
-  hibernate:
-    ddl-auto: validate
-#Monitoring endpoints   
+#Monitoring endpoints
 management:
    endpoints:
       web:

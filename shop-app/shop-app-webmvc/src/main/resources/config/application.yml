@@ -3,11 +3,6 @@ spring:
     name: '@project.name@'
   profiles:
     active: '@spring.profiles.active@'
-  jpa:
-    open-in-view: false
-  cache:
-    jcache:
-      config: classpath:cache/ehcache.xml
 logging:
   level:
     ROOT: INFO
