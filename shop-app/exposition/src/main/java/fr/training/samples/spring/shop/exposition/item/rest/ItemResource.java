@@ -30,7 +30,6 @@ public class ItemResource {
 	private ItemManagement itemManagement;
 
 	public ItemResource(ItemManagement itemManagement, ItemMapper itemMapper) {
-		super();
 		this.itemManagement = itemManagement;
 		this.itemMapper = itemMapper;
 	}
