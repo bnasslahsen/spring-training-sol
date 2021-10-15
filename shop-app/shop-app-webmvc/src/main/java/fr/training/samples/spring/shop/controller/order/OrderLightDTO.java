@@ -7,7 +7,7 @@ import java.util.Set;
  * @author Badr NASS
  *
  */
-class OrderLightDTO implements Serializable {
+public class OrderLightDTO implements Serializable {
 
     /**
      * serialVersionUID of type long
@@ -32,9 +32,13 @@ class OrderLightDTO implements Serializable {
     }
 
 
-    /**
-     * @return
-     */
+	public OrderLightDTO(String cusID) {
+		this.customerID = cusID;
+	}
+
+	/**
+	 * @return
+	 */
     public String getCustomerID() {
         return customerID;
     }

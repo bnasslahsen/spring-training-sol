@@ -20,13 +20,15 @@ public class ItemController {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Value("${spring.shop.showItems.url}")
-	private String showItemsUrl;
+	@Value("${spring.shop.api.url}")
+	private String apiUrl;
+
+	private static final String ITEMS_URI =  "/api/items";
 
 
 	@GetMapping("/items")
 	public String showItems(Model model) {
-		ItemDTO[] response = restTemplate.getForObject(showItemsUrl, ItemDTO[].class);
+		ItemDTO[] response = restTemplate.getForObject(apiUrl + ITEMS_URI, ItemDTO[].class);
 		List<ItemDTO> items = Arrays.asList(response);
 		model.addAttribute("items", items);
 		return "items";

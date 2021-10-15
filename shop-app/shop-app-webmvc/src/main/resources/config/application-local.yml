@@ -3,10 +3,6 @@ spring:
   shop:
     api:
       url: http://localhost:8080
-    showItems:
-      url: ${spring.shop.api.url}/api/items
-    addOrder:
-      url: ${spring.shop.api.url}/api/addOrder
 
 management:
    endpoints:
