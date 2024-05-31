@@ -1,14 +1,7 @@
 package my.component.service.starter;
-
-import javax.annotation.PostConstruct;
-
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-/**
- * @author Badr
- */
-;
 
 public class StarterHelloImpl implements StarterHello {
 
@@ -29,7 +22,7 @@ public class StarterHelloImpl implements StarterHello {
 	public String sayHello(String _message) {
 		logger.debug("StarterHelloImpl IN");
 		String message = "StarterHelloImpl Hello : " + _message;
-		logger.info(message);
+		logger.debug(message);
 		return message;
 	}
 
