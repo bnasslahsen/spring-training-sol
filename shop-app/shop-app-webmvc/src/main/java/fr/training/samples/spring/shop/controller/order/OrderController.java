@@ -13,29 +13,33 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 @Controller
 public class OrderController {
 
 	@Autowired
-	private WebClient webClient;
+	private RestClient restClient;
 
+	
 	@GetMapping("/addOrder")
 	public ModelAndView showAddOrder(@ModelAttribute("orderModel") OrderModel orderModel) {
-		List<ItemDTO> items = webClient.get()
+		List<ItemDTO> items = restClient.get()
 				.uri("/api/items")
 				.retrieve()
-				.bodyToMono(new ParameterizedTypeReference<List<ItemDTO>>() {})
-				.block();
+				.body(new ParameterizedTypeReference<>() {});
 
 		orderModel.setItems(items);
 		return new ModelAndView("addOrder", "orderModel", orderModel);
@@ -60,13 +64,13 @@ public class OrderController {
 		HashSet<String> itemIdSet = new HashSet<>();
 		itemIDs.forEach(i -> itemIdSet.add(i));
 		orderLightDTO.setItems(itemIdSet);
-
-		webClient.post()
+		
+		restClient.post()
 				.uri("/api/orders")
-				.body(BodyInserters.fromValue(orderLightDTO))
+				.contentType(APPLICATION_JSON)
+				.body(orderLightDTO)
 				.retrieve()
-				.bodyToMono(String.class)
-				.block();
+				.body(String.class);
 
 		return new ModelAndView(new RedirectView("addOrder"));
 	}
