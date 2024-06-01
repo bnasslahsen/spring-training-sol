@@ -1,0 +1,21 @@
+spring:
+  ## Thymeleaf configuration:
+  thymeleaf:
+    cache: false
+    mode: HTML
+  
+  # MongoDB
+  data:
+    mongodb:
+      host: localhost
+      database: dataSource
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 7.0.0
+
+springdoc:
+  swagger-ui:
+    use-root-path: true

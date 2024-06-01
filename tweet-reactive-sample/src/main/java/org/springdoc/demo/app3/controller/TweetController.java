@@ -18,7 +18,7 @@
 
 package org.springdoc.demo.app3.controller;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -63,7 +63,7 @@ public class TweetController {
 	@PostMapping("/tweets")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "create Tweets") })
 	public Mono<TweetDTO> createTweets(@Valid @RequestBody TweetDTO tweetDTO) {
-		return tweetMapper.toDTO(tweetRepository.save(tweetMapper.toEntity(tweetDTO)));
+		return tweetRepository.save(tweetMapper.toEntity(tweetDTO)).map(tweetMapper::toDTO);
 	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "get Tweet By Id"),
