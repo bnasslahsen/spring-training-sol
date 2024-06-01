@@ -23,14 +23,11 @@
 
 package fr.training.samples.spring.shop.infrastructure.order;
 
-import java.util.Optional;
 import java.util.Set;
 
 import fr.training.samples.spring.shop.domain.order.OrderEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 /**
  * The interface Order data jpa repository.

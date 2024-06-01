@@ -26,13 +26,12 @@ package fr.training.samples.spring.shop.exposition.order.rest;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import fr.training.samples.spring.shop.common.AbstractMapper;
 import fr.training.samples.spring.shop.domain.customer.CustomerEntity;
 import fr.training.samples.spring.shop.domain.item.ItemEntity;
 import fr.training.samples.spring.shop.domain.order.OrderEntity;
 import fr.training.samples.spring.shop.exposition.item.rest.ItemMapper;
+import jakarta.validation.Valid;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;

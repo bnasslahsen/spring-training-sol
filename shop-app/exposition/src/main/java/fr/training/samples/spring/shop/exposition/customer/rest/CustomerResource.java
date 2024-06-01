@@ -26,10 +26,10 @@ package fr.training.samples.spring.shop.exposition.customer.rest;
 import java.net.URI;
 
 import javax.management.timer.Timer;
-import javax.validation.Valid;
 
 import fr.training.samples.spring.shop.application.customer.CustomerManagement;
 import fr.training.samples.spring.shop.domain.customer.CustomerEntity;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

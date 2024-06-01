@@ -23,11 +23,10 @@
 
 package fr.training.samples.spring.shop.exposition.customer.rest;
 
-import javax.validation.Valid;
-
 import fr.training.samples.spring.shop.common.AbstractMapper;
 import fr.training.samples.spring.shop.domain.customer.CustomerEntity;
 import fr.training.samples.spring.shop.domain.customer.CustomerVO;
+import jakarta.validation.Valid;
 
 import org.springframework.stereotype.Component;
 

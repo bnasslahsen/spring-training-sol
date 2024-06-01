@@ -26,10 +26,9 @@ package fr.training.samples.spring.shop.exposition.order.rest;
 import java.net.URI;
 import java.util.Set;
 
-import javax.validation.Valid;
-
 import fr.training.samples.spring.shop.application.order.OrderManagement;
 import fr.training.samples.spring.shop.domain.order.OrderEntity;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

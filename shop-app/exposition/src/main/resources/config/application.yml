@@ -5,8 +5,8 @@ spring:
     active: '@spring.profiles.active@'
   jpa:
     open-in-view: false
-    #hibernate:
-      #ddl-auto: create
+    hibernate:
+      ddl-auto: create-drop
   cache:
     jcache:
       config: classpath:cache/ehcache.xml
