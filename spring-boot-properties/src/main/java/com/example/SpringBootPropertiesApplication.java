@@ -10,7 +10,7 @@ public class SpringBootPropertiesApplication {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(SpringBootPropertiesApplication.class, args);
 		HelloService helloService = applicationContext.getBean(HelloService.class);
-		helloService.sayHello("Test");
+		helloService.sayHello("Hello");
 	}
 
 }
