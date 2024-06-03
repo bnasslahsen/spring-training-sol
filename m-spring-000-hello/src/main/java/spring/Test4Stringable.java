@@ -13,12 +13,8 @@ public class Test4Stringable {
 		//
 		// Interface : ToStringable and NOT the real instance : UserStringable
 		//
-		UserStringable toto = (UserStringable) context.getBean("totoImpl", UserStringable.class);
-		
-		ToStringable toto1 = (ToStringable) context.getBean("totoImpl", ToStringable.class);
-
-		
-		//ToStringable toto = context.getBean("toto", ToStringable.class);
+		UserStringable toto = context.getBean("totoImpl", UserStringable.class);
+		ToStringable toto1 = context.getBean("totoImpl", ToStringable.class);
 		
 		String str = toto.toString();
 		System.out.println("The result is " + str);
