@@ -29,7 +29,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /**
- * Created by rajeevkumarsingh on 08/09/17.
+ * Created by bnasslahsen on 08/09/17.
  */
 @Document(collection = "tweets")
 public class Tweet {

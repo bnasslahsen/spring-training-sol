@@ -42,16 +42,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by rajeevkumarsingh on 08/09/17.
+ * Created by bnasslahsen
  */
 @RestController
 public class TweetController {
 
-	@Autowired
-	private TweetRepository tweetRepository;
+	private final TweetRepository tweetRepository;
 
-	@Autowired
-	private TweetMapper tweetMapper;
+	private final TweetMapper tweetMapper;
+
+	public TweetController(TweetRepository tweetRepository, TweetMapper tweetMapper) {
+		this.tweetRepository = tweetRepository;
+		this.tweetMapper = tweetMapper;
+	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "get All Tweets") })
 	@GetMapping("/tweets")
