@@ -3,7 +3,7 @@ package fr.training.spring;
 
 import org.springframework.stereotype.Component;
 
-@Component("springDeveloper")
+@Component
 public class DependencyInjectionDeveloper {
 
 	private Task task;

@@ -13,7 +13,7 @@ public class Main {
 		anna.doTask();
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		DependencyInjectionDeveloper sam = (DependencyInjectionDeveloper) ctx.getBean("springDeveloper");
+		DependencyInjectionDeveloper sam = ctx.getBean(DependencyInjectionDeveloper.class);
 		sam.doTask();
 	}
 }
